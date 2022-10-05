@@ -13,7 +13,9 @@
     "rollup": "rollup -c"
   },
   "dependencies": {
+    "bootstrap": "^5.2.2",
     "lodash": ">=4.17.21",
+    "react-bootstrap": "^2.5.0",
     "sugax": ">=1.0.43"
   },
   "peerDependencies": {

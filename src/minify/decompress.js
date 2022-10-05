@@ -1,5 +1,5 @@
 //
-//  client.js
+//  decompress.js
 //
 //  The MIT License
 //  Copyright (c) 2021 - 2022 O2ter Limited. All rights reserved.
@@ -23,31 +23,21 @@
 //  THE SOFTWARE.
 //
 
-import './client/polyfill';
-import 'bootstrap/dist/js/bootstrap.js';
-
-import { decompress } from './minify/decompress';
-global.env = JSON.parse(decompress(document.getElementById('env').text));
-
-import _ from 'lodash';
-import React from 'react';
-import { I18nProvider } from 'sugax';
-import { AppRegistry } from 'react-native';
-import { SSRProvider } from 'react-bootstrap';
-import { BrowserNavigator } from 'o2ter-ui';
-
-export const runApplication = (App) => {
-
-  const preferredLocale = document.cookie.split('; ').find((row) => row.startsWith('PREFERRED_LOCALE='))?.split('=')[1];
-
-  function Main() {
-    return <SSRProvider><I18nProvider
-      preferredLocale={preferredLocale}
-      onChange={locale => document.cookie = `PREFERRED_LOCALE=${locale}; max-age=31536000; path=/`}>
-      <BrowserNavigator><App /></BrowserNavigator>
-    </I18nProvider></SSRProvider>;
+export const decompress = (o) => {
+  function r(r) {
+    for (i = f = 0; i < r; )
+      A < 2 && ((A = 64), (a = 92 < (a = o.charCodeAt(C++)) ? a - 59 : a - 58)),
+        (f |= (0 < (a & (A /= 2))) << i),
+        ++i;
   }
-  
-  AppRegistry.registerComponent('App', () => Main);
-  AppRegistry.runApplication('App', { rootTag: document.getElementById('root') });
-}
+  for (var n, f, i, t, a, e = [], u = 1, _ = 3, c = 1, h = [], A = 0, C = 0;;) {
+    if ((r(c + 1), 2 == f)) return h.join("");
+    -2 & (t = f) ||
+      (r(8 * f + 8),
+      (e[(t = _++)] = String.fromCharCode(f)),
+      --u || (u = 2 << c++)),
+      h.push((t = e[t] || n + n[0])),
+      n && ((e[_++] = n + t[0]), --u || (u = 2 << c++)),
+      (n = t);
+  }
+};
