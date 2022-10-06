@@ -1,5 +1,5 @@
 //
-//  client.js
+//  env.js
 //
 //  The MIT License
 //  Copyright (c) 2021 - 2022 O2ter Limited. All rights reserved.
@@ -23,30 +23,11 @@
 //  THE SOFTWARE.
 //
 
-import './client/polyfill';
-import 'bootstrap/dist/js/bootstrap.js';
+import { decompress } from '../minify/decompress';
 
-export * from './client/env';
+const envElement = document.getElementById('env');
+const env = JSON.parse(decompress(envElement.text));
 
-import _ from 'lodash';
-import React from 'react';
-import { I18nProvider } from 'sugax';
-import { AppRegistry } from 'react-native';
-import { SSRProvider } from 'react-bootstrap';
-import { BrowserNavigator } from 'o2ter-ui';
+envElement.remove();
 
-export const runApplication = (App) => {
-
-  const preferredLocale = document.cookie.split('; ').find((row) => row.startsWith('PREFERRED_LOCALE='))?.split('=')[1];
-
-  function Main() {
-    return <SSRProvider><I18nProvider
-      preferredLocale={preferredLocale}
-      onChange={locale => document.cookie = `PREFERRED_LOCALE=${locale}; max-age=31536000; path=/`}>
-      <BrowserNavigator><App /></BrowserNavigator>
-    </I18nProvider></SSRProvider>;
-  }
-  
-  AppRegistry.registerComponent('App', () => Main);
-  AppRegistry.runApplication('App', { rootTag: document.getElementById('root') });
-}
+export { env };

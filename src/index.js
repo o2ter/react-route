@@ -96,7 +96,7 @@ function _renderToHTML(App, {
       </head>
       <body>
         <div id="root">${html}</div>
-        <script id="env" type="text/plain">${compress(JSON.stringify(env ?? {}))}</script>
+        <script id="env" type="text/plain">${compress(JSON.stringify(env))}</script>
         <script src="${jsSrc}"></script>
       </body>
     </html>
