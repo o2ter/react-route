@@ -23,10 +23,10 @@
 //  THE SOFTWARE.
 //
 
-import './client/polyfill';
+import './polyfill';
 import 'bootstrap/dist/js/bootstrap.js';
 
-export * from './client/env';
+export * from './env';
 
 import React from 'react';
 import { I18nProvider } from 'sugax';
