@@ -28,7 +28,6 @@ import 'bootstrap/dist/js/bootstrap.js';
 
 export * from './client/env';
 
-import _ from 'lodash';
 import React from 'react';
 import { I18nProvider } from 'sugax';
 import { AppRegistry } from 'react-native';
