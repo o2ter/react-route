@@ -33,6 +33,7 @@ import { I18nProvider } from 'sugax';
 import { AppRegistry } from 'react-native';
 import { SSRProvider } from 'react-bootstrap';
 import { StaticNavigator } from 'o2ter-ui';
+import { SafeAreaProvider } from './safeArea';
 import ReactDOMServer from 'react-dom/server';
 
 import { compress } from './minify/compress';
@@ -66,7 +67,9 @@ function _renderToHTML(App, {
 
   function Main() {
     return <SSRProvider><I18nProvider preferredLocale={preferredLocale}>
-      <StaticNavigator location={location} context={context}><App /></StaticNavigator>
+      <StaticNavigator location={location} context={context}>
+        <SafeAreaProvider><App /></SafeAreaProvider>
+      </StaticNavigator>
     </I18nProvider></SSRProvider>;
   }
 

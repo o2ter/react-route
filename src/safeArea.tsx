@@ -1,5 +1,5 @@
 //
-//  client.js
+//  safeArea.tsx
 //
 //  The MIT License
 //  Copyright (c) 2021 - 2022 O2ter Limited. All rights reserved.
@@ -23,32 +23,15 @@
 //  THE SOFTWARE.
 //
 
-import './polyfill';
-import 'bootstrap/dist/js/bootstrap.js';
+import React, { ComponentPropsWithoutRef } from 'react';
+import { SafeAreaProvider as _SafeAreaProvider } from 'o2ter-ui';
 
-export * from './env';
+const defaultMetrics = {
+  frame: { x: 0, y: 0, width: 0, height: 0 },
+  insets: { top: 0, left: 0, right: 0, bottom: 0 },
+};
 
-import React from 'react';
-import { I18nProvider } from 'sugax';
-import { AppRegistry } from 'react-native';
-import { SSRProvider } from 'react-bootstrap';
-import { BrowserNavigator } from 'o2ter-ui';
-import { SafeAreaProvider } from '../safeArea';
-
-export const runApplication = (App) => {
-
-  const preferredLocale = document.cookie.split('; ').find((row) => row.startsWith('PREFERRED_LOCALE='))?.split('=')[1];
-
-  function Main() {
-    return <SSRProvider><I18nProvider
-      preferredLocale={preferredLocale}
-      onChange={locale => document.cookie = `PREFERRED_LOCALE=${locale}; max-age=31536000; path=/`}>
-      <BrowserNavigator>
-        <SafeAreaProvider><App /></SafeAreaProvider>
-      </BrowserNavigator>
-    </I18nProvider></SSRProvider>;
-  }
-
-  AppRegistry.registerComponent('App', () => Main);
-  AppRegistry.runApplication('App', { rootTag: document.getElementById('root') });
-}
+export const SafeAreaProvider: React.FC<ComponentPropsWithoutRef<typeof _SafeAreaProvider>> = ({
+  children,
+  ...props
+}) => <_SafeAreaProvider initialMetrics={defaultMetrics} {...props}>{children}</_SafeAreaProvider>
