@@ -1561,7 +1561,7 @@ boolbase@^1.0.0:
   resolved "https://registry.yarnpkg.com/boolbase/-/boolbase-1.0.0.tgz#68dff5fbe60c51eb37725ea9e3ed310dcc1e776e"
   integrity sha512-JZOSA7Mo9sNGB8+UjSgzdLtokWAky1zbztM3WRLCbZ70/3cTANmQmOdR7y2g+J0e2WXywy1yS468tY+IruqEww==
 
-bootstrap@^5.2.2:
+bootstrap@>=5.2.2:
   version "5.2.2"
   resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-5.2.2.tgz#834e053eed584a65e244d8aa112a6959f56e27a0"
   integrity sha512-dEtzMTV71n6Fhmbg4fYJzQsw1N29hJKO1js5ackCgIpDcGid2ETMGC6zwSYw09v05Y+oRdQ9loC54zB1La3hHQ==
@@ -1710,7 +1710,7 @@ convert-source-map@^1.7.0:
   dependencies:
     safe-buffer "~5.1.1"
 
-cookie-parser@^1.4.6:
+cookie-parser@>=1.4.6:
   version "1.4.6"
   resolved "https://registry.yarnpkg.com/cookie-parser/-/cookie-parser-1.4.6.tgz#3ac3a7d35a7a03bbc7e365073a26074824214594"
   integrity sha512-z3IzaNjdwUC2olLIB5/ITd0/setiaFMLYiZJle7xg5Fe9KWAceil7xszYfHHBtDFYLSgJduS2Ty0P1uJdPDJeA==
@@ -2344,7 +2344,7 @@ nth-check@^2.0.1:
   dependencies:
     boolbase "^1.0.0"
 
-o2ter-ui@^0.0.32:
+o2ter-ui@>=0.0.32:
   version "0.0.32"
   resolved "https://registry.yarnpkg.com/o2ter-ui/-/o2ter-ui-0.0.32.tgz#5a2e936c5156c9bc6a198296c2a76d72c05a9bd3"
   integrity sha512-ZjQaU8KSyVvggnM8RVoaKEAZmqx+xCDrBtkvS7lrtZxrCSrr/H6ePQvULeRENxCG/yuM1yX4VtsistyFvxw9KQ==
@@ -2501,7 +2501,7 @@ randombytes@^2.1.0:
   dependencies:
     safe-buffer "^5.1.0"
 
-react-bootstrap@^2.5.0:
+react-bootstrap@>=2.5.0:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/react-bootstrap/-/react-bootstrap-2.5.0.tgz#e25e649e37f080d38eeb92ad5b4ed562a1d7de62"
   integrity sha512-j/aLR+okzbYk61TM3eDOU1NqOqnUdwyVrF+ojoCRUxPdzc2R0xXvqyRsjSoyRoCo7n82Fs/LWjPCin/QJNdwvA==
