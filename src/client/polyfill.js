@@ -23,8 +23,8 @@
 //  THE SOFTWARE.
 //
 
-if (!global.SharedArrayBuffer) {
-  global.SharedArrayBuffer = {
+if (!globalThis.SharedArrayBuffer) {
+  globalThis.SharedArrayBuffer = {
     prototype: {
       get byteLength() { }
     }
