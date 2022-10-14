@@ -17,9 +17,9 @@
     "bootstrap": ">=5.2.2",
     "cookie-parser": ">=1.4.6",
     "lodash": ">=4.17.21",
-    "o2ter-ui": ">=0.0.38",
+    "o2ter-ui": ">=0.0.39",
     "react-bootstrap": ">=2.5.0",
-    "sugax": ">=1.0.46"
+    "sugax": ">=1.0.47"
   },
   "peerDependencies": {
     "express": ">=4.18.2",
