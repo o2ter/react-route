@@ -113,7 +113,6 @@ export const ReactRoute = (App, {
 }) => {
 
   const router = express.Router();
-
   router.use(cookieParser());
 
   router.get('*', (req, res) => {
