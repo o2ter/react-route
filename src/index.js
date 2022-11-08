@@ -29,7 +29,7 @@ import express from 'express';
 import cookieParser from 'cookie-parser';
 
 import React from 'react';
-import { I18nProvider } from 'sugax';
+import { I18nProvider } from './i18n';
 import { AppRegistry } from 'react-native';
 import { SSRProvider } from 'react-bootstrap';
 import { StaticNavigator } from 'o2ter-ui';

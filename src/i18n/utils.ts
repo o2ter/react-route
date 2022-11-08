@@ -1,5 +1,5 @@
 //
-//  client.js
+//  utils.tsx
 //
 //  The MIT License
 //  Copyright (c) 2021 - 2022 O2ter Limited. All rights reserved.
@@ -23,32 +23,16 @@
 //  THE SOFTWARE.
 //
 
-import './polyfill';
-import 'bootstrap/dist/js/bootstrap.js';
+import _ from 'lodash';
 
-export * from './env';
+export function replaceAll(string: string, pattern: string, replacement: string) {
 
-import React from 'react';
-import { I18nProvider } from '../i18n';
-import { AppRegistry } from 'react-native';
-import { SSRProvider } from 'react-bootstrap';
-import { BrowserNavigator } from 'o2ter-ui';
-import { SafeAreaProvider } from '../safeArea';
+  let idx = string.lastIndexOf(pattern);
 
-export const runApplication = (App) => {
-
-  const preferredLocale = document.cookie.split('; ').find((row) => row.startsWith('PREFERRED_LOCALE='))?.split('=')[1];
-
-  function Main() {
-    return <SSRProvider><I18nProvider
-      preferredLocale={preferredLocale}
-      onChange={locale => document.cookie = `PREFERRED_LOCALE=${locale}; max-age=31536000; path=/`}>
-      <BrowserNavigator>
-        <SafeAreaProvider><App /></SafeAreaProvider>
-      </BrowserNavigator>
-    </I18nProvider></SSRProvider>;
+  while (idx !== -1) {
+    string = string.substring(0, idx) + replacement + string.substring(idx + pattern.length);
+    idx = string.lastIndexOf(pattern);
   }
 
-  AppRegistry.registerComponent('App', () => Main);
-  AppRegistry.runApplication('App', { rootTag: document.getElementById('root') });
+  return string;
 }
