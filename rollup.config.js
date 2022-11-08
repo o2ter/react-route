@@ -18,12 +18,13 @@ const rollupPlugins = [
   json(),
 ];
 
-const rollupOutputs = (name) => [
+const rollupOutputs = (name, externals = []) => [
   {
     input: `src/${name}`,
     external: [
+      ...externals,
       /node_modules/
-    ],
+    ].filter(Boolean),
     output: [
       {
         file: `dist/${name}.js`,
@@ -45,7 +46,8 @@ const rollupOutputs = (name) => [
       }),
       ...rollupPlugins
     ],
-  },{
+  },
+  {
     input: `src/${name}`,
     external: [
       /node_modules/
@@ -69,6 +71,7 @@ const rollupOutputs = (name) => [
 ];
 
 export default [
-  ...rollupOutputs('index'),
-  ...rollupOutputs('client'),
+  ...rollupOutputs('index', [/i18n/]),
+  ...rollupOutputs('client/index', [/i18n/]),
+  ...rollupOutputs('i18n/index'),
 ];
