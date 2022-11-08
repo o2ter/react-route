@@ -45,7 +45,8 @@ const rollupOutputs = (name) => [
       }),
       ...rollupPlugins
     ],
-  },{
+  },
+  {
     input: `src/${name}`,
     external: [
       /node_modules/

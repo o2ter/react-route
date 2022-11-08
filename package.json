@@ -15,6 +15,7 @@
     "rollup": "yarn clean && rollup -c"
   },
   "dependencies": {
+    "@o2ter/i18n": "^0.0.1",
     "cookie-parser": ">=1.4.6",
     "lodash": ">=4.17.21"
   },

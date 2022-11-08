@@ -29,7 +29,7 @@ import 'bootstrap/dist/js/bootstrap.js';
 export * from './env';
 
 import React from 'react';
-import { I18nProvider } from '../i18n';
+import { I18nProvider } from '@o2ter/i18n';
 import { AppRegistry } from 'react-native';
 import { SSRProvider } from 'react-bootstrap';
 import { BrowserNavigator } from 'o2ter-ui';
