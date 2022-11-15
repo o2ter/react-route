@@ -2286,13 +2286,12 @@ nth-check@^2.0.1:
   dependencies:
     boolbase "^1.0.0"
 
-o2ter-ui@^0.0.56:
-  version "0.0.56"
-  resolved "https://registry.yarnpkg.com/o2ter-ui/-/o2ter-ui-0.0.56.tgz#00e18d18ae00b441c5c0229f18e9f260655f8ca3"
-  integrity sha512-l0WAykUt2zRlXd5e66Dez93uGlxGJGCFuy9Mlv4xCwsJ6PlV6cF7Qm3HM8wHTj433oU9AZZTIT+Ob3vD5lCAHg==
+o2ter-ui@^0.0.60:
+  version "0.0.60"
+  resolved "https://registry.yarnpkg.com/o2ter-ui/-/o2ter-ui-0.0.60.tgz#77792f27ea6700e1b292cd044915b22e61e9e43e"
+  integrity sha512-CfndnSyi5shiw1BY2Ucmz/I9ue3HZ9tbbIcOclfEKl3FXwh12wC0rnl8uUBN/5yIyQ5rukADQ/uAf79OPSkUMQ==
   dependencies:
     "@react-native-picker/picker" ">=2.4.7"
-    events ">=3.3.0"
     jsbarcode ">=3.11.5"
     lodash ">=4.17.21"
     lottie-ios ">=3.4.4"
