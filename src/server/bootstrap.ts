@@ -34,41 +34,41 @@ const compile = async (theme: ThemeVariables) => {
 
   const styles: Record<string, string | number> = {};
 
-  if (theme.grays?.['100']) styles['$gray-100'] = theme.grays['100'];
-  if (theme.grays?.['200']) styles['$gray-200'] = theme.grays['200'];
-  if (theme.grays?.['300']) styles['$gray-300'] = theme.grays['300'];
-  if (theme.grays?.['400']) styles['$gray-400'] = theme.grays['400'];
-  if (theme.grays?.['500']) styles['$gray-500'] = theme.grays['500'];
-  if (theme.grays?.['600']) styles['$gray-600'] = theme.grays['600'];
-  if (theme.grays?.['700']) styles['$gray-700'] = theme.grays['700'];
-  if (theme.grays?.['800']) styles['$gray-800'] = theme.grays['800'];
-  if (theme.grays?.['900']) styles['$gray-900'] = theme.grays['900'];
+  if (theme.grays?.['100']) styles['gray-100'] = theme.grays['100'];
+  if (theme.grays?.['200']) styles['gray-200'] = theme.grays['200'];
+  if (theme.grays?.['300']) styles['gray-300'] = theme.grays['300'];
+  if (theme.grays?.['400']) styles['gray-400'] = theme.grays['400'];
+  if (theme.grays?.['500']) styles['gray-500'] = theme.grays['500'];
+  if (theme.grays?.['600']) styles['gray-600'] = theme.grays['600'];
+  if (theme.grays?.['700']) styles['gray-700'] = theme.grays['700'];
+  if (theme.grays?.['800']) styles['gray-800'] = theme.grays['800'];
+  if (theme.grays?.['900']) styles['gray-900'] = theme.grays['900'];
 
   if (!_.isEmpty(theme.colors)) {
     for (const [name, color] of _.entries(theme.colors)) {
-      styles['$' + name] = color;
+      styles['' + name] = color;
     }
-    styles['$colors'] = `(${_.map(theme.colors, (color, name) => `"${name}": ${color}`).join(',')})`
+    styles['colors'] = `(${_.map(theme.colors, (color, name) => `"${name}": ${color}`).join(',')})`
   }
 
   if (!_.isEmpty(theme.themeColors)) {
     for (const [name, color] of _.entries(theme.themeColors)) {
-      styles['$' + name] = color;
+      styles['' + name] = color;
     }
-    styles['$theme-colors'] = `(${_.map(theme.themeColors, (color, name) => `"${name}": ${color}`).join(',')})`;
+    styles['theme-colors'] = `(${_.map(theme.themeColors, (color, name) => `"${name}": ${color}`).join(',')})`;
   }
 
-  if (_.isNumber(theme.minContrastRatio)) styles['$min-contrast-ratio'] = theme.minContrastRatio;
-  if (_.isString(theme.colorContrastDark)) styles['$color-contrast-dark'] = theme.colorContrastDark;
-  if (_.isString(theme.colorContrastLight)) styles['$color-contrast-light'] = theme.colorContrastLight;
+  if (_.isNumber(theme.minContrastRatio)) styles['min-contrast-ratio'] = theme.minContrastRatio;
+  if (_.isString(theme.colorContrastDark)) styles['color-contrast-dark'] = theme.colorContrastDark;
+  if (_.isString(theme.colorContrastLight)) styles['color-contrast-light'] = theme.colorContrastLight;
 
-  if (_.isNumber(theme.spacer)) styles['$spacer'] = theme.spacer;
+  if (_.isNumber(theme.spacer)) styles['spacer'] = theme.spacer;
 
-  if (_.isString(theme.bodyBackground)) styles['$body-bg'] = theme.bodyBackground;
-  if (_.isString(theme.bodyColor)) styles['$body-color'] = theme.bodyColor;
+  if (_.isString(theme.bodyBackground)) styles['body-bg'] = theme.bodyBackground;
+  if (_.isString(theme.bodyColor)) styles['body-color'] = theme.bodyColor;
 
   if (!_.isEmpty(theme.breakpoints)) {
-    styles['$grid-breakpoints'] = `(${_.map(theme.breakpoints, (breakpoint, name) => `${name}: ${breakpoint}px`).join(',')})`;
+    styles['grid-breakpoints'] = `(${_.map(theme.breakpoints, (breakpoint, name) => `${name}: ${breakpoint}px`).join(',')})`;
   }
 
   return compileStringAsync(styles);
