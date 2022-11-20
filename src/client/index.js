@@ -23,9 +23,7 @@
 //  THE SOFTWARE.
 //
 
-import './polyfill';
-import 'bootstrap/dist/js/bootstrap.js';
-
+if (typeof document !== 'undefined') require('bootstrap/dist/js/bootstrap.js');
 export * from './env';
 
 import React from 'react';
