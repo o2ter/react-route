@@ -34,15 +34,15 @@ const compile = async (theme: ThemeVariables) => {
 
   const styles: Record<string, string | number> = {};
 
-  if (theme.grays['100']) styles['$gray-100'] = theme.grays['100'];
-  if (theme.grays['200']) styles['$gray-200'] = theme.grays['200'];
-  if (theme.grays['300']) styles['$gray-300'] = theme.grays['300'];
-  if (theme.grays['400']) styles['$gray-400'] = theme.grays['400'];
-  if (theme.grays['500']) styles['$gray-500'] = theme.grays['500'];
-  if (theme.grays['600']) styles['$gray-600'] = theme.grays['600'];
-  if (theme.grays['700']) styles['$gray-700'] = theme.grays['700'];
-  if (theme.grays['800']) styles['$gray-800'] = theme.grays['800'];
-  if (theme.grays['900']) styles['$gray-900'] = theme.grays['900'];
+  if (theme.grays?.['100']) styles['$gray-100'] = theme.grays['100'];
+  if (theme.grays?.['200']) styles['$gray-200'] = theme.grays['200'];
+  if (theme.grays?.['300']) styles['$gray-300'] = theme.grays['300'];
+  if (theme.grays?.['400']) styles['$gray-400'] = theme.grays['400'];
+  if (theme.grays?.['500']) styles['$gray-500'] = theme.grays['500'];
+  if (theme.grays?.['600']) styles['$gray-600'] = theme.grays['600'];
+  if (theme.grays?.['700']) styles['$gray-700'] = theme.grays['700'];
+  if (theme.grays?.['800']) styles['$gray-800'] = theme.grays['800'];
+  if (theme.grays?.['900']) styles['$gray-900'] = theme.grays['900'];
 
   if (!_.isEmpty(theme.colors)) {
     for (const [name, color] of _.entries(theme.colors)) {
@@ -52,10 +52,10 @@ const compile = async (theme: ThemeVariables) => {
   }
 
   if (!_.isEmpty(theme.themeColors)) {
-    for (const [name, color] of _.entries(theme.colors)) {
+    for (const [name, color] of _.entries(theme.themeColors)) {
       styles['$' + name] = color;
     }
-    styles['$theme-colors'] = `(${_.map(theme.colors, (color, name) => `"${name}": ${color}`).join(',')})`;
+    styles['$theme-colors'] = `(${_.map(theme.themeColors, (color, name) => `"${name}": ${color}`).join(',')})`;
   }
 
   if (_.isNumber(theme.minContrastRatio)) styles['$min-contrast-ratio'] = theme.minContrastRatio;
@@ -81,7 +81,7 @@ export const BootstrapRoute = (
   const router = express.Router();
 
   for (const [name, theme] of _.entries(themes)) {
-    router.get(`${name}.css`, async (req, res) => {
+    router.get(`/${name}.css`, async (req, res) => {
       if (_.isString(caches[name])) return res.send(caches[name]);
       const css = await compile(theme);
       caches[name] = css;
