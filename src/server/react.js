@@ -29,12 +29,12 @@ import express from 'express';
 import cookieParser from 'cookie-parser';
 
 import React from 'react';
+import ReactDOMServer from 'react-dom/server';
 import { I18nProvider } from '@o2ter/i18n';
 import { AppRegistry } from 'react-native';
 import { SSRProvider } from 'react-bootstrap';
 import { StaticNavigator } from 'o2ter-ui';
-import { SafeAreaProvider } from './safeArea';
-import ReactDOMServer from 'react-dom/server';
+import { SafeAreaProvider } from '../safeArea';
 
 import { compress } from '../minify/compress';
 
