@@ -82,6 +82,7 @@ export const BootstrapRoute = (
 
   for (const [name, theme] of _.entries(themes)) {
     router.get(`/${name}.css`, async (req, res) => {
+      res.setHeader('content-type', 'text/css');
       if (_.isString(caches[name])) return res.send(caches[name]);
       const css = await compile(theme);
       caches[name] = css;
