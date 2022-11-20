@@ -29,7 +29,6 @@ import express from 'express';
 import { ThemeVariables } from 'o2ter-ui';
 import { compileStringAsync } from '@o2ter/bootstrap.js';
 
-const caches: Record<string, string> = {};
 const compile = async (theme: ThemeVariables) => {
 
   const styles: Record<string, string | number> = {};
@@ -77,18 +76,13 @@ const compile = async (theme: ThemeVariables) => {
 export const BootstrapRoute = (
   themes: Record<string, ThemeVariables>,
 ) => {
-
   const router = express.Router();
-
   for (const [name, theme] of _.entries(themes)) {
+    const css = compile(theme);
     router.get(`/${name}.css`, async (req, res) => {
       res.setHeader('content-type', 'text/css');
-      if (_.isString(caches[name])) return res.send(caches[name]);
-      const css = await compile(theme);
-      caches[name] = css;
-      return res.send(css);
+      res.send(await css);
     });
   }
-
   return router;
 }
