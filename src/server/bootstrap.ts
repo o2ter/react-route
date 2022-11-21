@@ -61,7 +61,7 @@ const compile = async (theme: ThemeVariables) => {
   if (_.isString(theme.colorContrastDark)) styles['color-contrast-dark'] = theme.colorContrastDark;
   if (_.isString(theme.colorContrastLight)) styles['color-contrast-light'] = theme.colorContrastLight;
 
-  if (_.isNumber(theme.spacer)) styles['spacer'] = theme.spacer;
+  if (_.isNumber(theme.spacer)) styles['spacer'] = `${theme.spacer}`;
 
   if (_.isString(theme.bodyBackground)) styles['body-bg'] = theme.bodyBackground;
   if (_.isString(theme.bodyColor)) styles['body-color'] = theme.bodyColor;
