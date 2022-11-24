@@ -45,14 +45,14 @@ const compile = async (theme: ThemeVariables) => {
 
   if (!_.isEmpty(theme.colors)) {
     for (const [name, color] of _.entries(theme.colors)) {
-      styles['' + name] = color;
+      styles[name] = color;
     }
     styles['colors'] = `(${_.map(theme.colors, (color, name) => `"${name}": ${color}`).join(',')})`
   }
 
   if (!_.isEmpty(theme.themeColors)) {
     for (const [name, color] of _.entries(theme.themeColors)) {
-      styles['' + name] = color;
+      styles[name] = color;
     }
     styles['theme-colors'] = `(${_.map(theme.themeColors, (color, name) => `"${name}": ${color}`).join(',')})`;
   }
@@ -62,12 +62,36 @@ const compile = async (theme: ThemeVariables) => {
   if (_.isString(theme.colorContrastLight)) styles['color-contrast-light'] = theme.colorContrastLight;
 
   if (_.isNumber(theme.spacer)) styles['spacer'] = `${theme.spacer}px`;
+  if (!_.isEmpty(theme.spacers)) {
+    styles['spacers'] = `(${_.map(theme.spacers, (spacer, name) => `${name}: ${spacer}px`).join(',')})`;
+  }
+
+  if (_.isNumber(theme.borderWidth)) styles['border-width'] = `${theme.borderWidth}px`;
+  if (!_.isEmpty(theme.borderWidths)) {
+    styles['border-widths'] = `(${_.map(theme.borderWidths, (width, name) => `${name}: ${width}px`).join(',')})`;
+  }
+
+  if (_.isNumber(theme.borderRadiusBase)) styles['border-radius'] = `${theme.borderRadiusBase}px`;
+  if (!_.isEmpty(theme.borderRadius)) {
+    if (_.isNumber(theme.borderRadius['sm'])) styles['border-radius-sm'] = `${theme.borderRadius['sm']}px`;
+    if (_.isNumber(theme.borderRadius['lg'])) styles['border-radius-lg'] = `${theme.borderRadius['lg']}px`;
+    if (_.isNumber(theme.borderRadius['xl'])) styles['border-radius-xl'] = `${theme.borderRadius['xl']}px`;
+    if (_.isNumber(theme.borderRadius['xxl'])) styles['border-radius-2xl'] = `${theme.borderRadius['xxl']}px`;
+  }
 
   if (_.isString(theme.bodyBackground)) styles['body-bg'] = theme.bodyBackground;
   if (_.isString(theme.bodyColor)) styles['body-color'] = theme.bodyColor;
 
   if (!_.isEmpty(theme.breakpoints)) {
     styles['grid-breakpoints'] = `(${_.map(theme.breakpoints, (breakpoint, name) => `${name}: ${breakpoint}px`).join(',')})`;
+  }
+
+  if (_.isString(theme.fontWeightBase)) styles['font-weight-base'] = theme.fontWeightBase;
+  if (!_.isEmpty(theme.fontWeights)) {
+    if (_.isString(theme.fontWeights['light'])) styles['font-weight-light'] = theme.fontWeights['light'];
+    if (_.isString(theme.fontWeights['normal'])) styles['font-weight-normal'] = theme.fontWeights['normal'];
+    if (_.isString(theme.fontWeights['semibold'])) styles['font-weight-semibold'] = theme.fontWeights['semibold'];
+    if (_.isString(theme.fontWeights['bold'])) styles['font-weight-bold'] = theme.fontWeights['bold'];
   }
 
   return compileStringAsync(styles);
