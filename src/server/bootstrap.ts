@@ -27,7 +27,7 @@ import _ from 'lodash';
 
 import express from 'express';
 import { ThemeVariables } from 'o2ter-ui';
-import { compileStringAsync } from '@o2ter/bootstrap.js';
+import { compileString } from '@o2ter/bootstrap.js';
 
 const compile = async (theme: ThemeVariables) => {
 
@@ -94,7 +94,7 @@ const compile = async (theme: ThemeVariables) => {
     if (_.isString(theme.fontWeights['bold'])) styles['font-weight-bold'] = theme.fontWeights['bold'];
   }
 
-  return compileStringAsync(styles);
+  return compileString(styles);
 }
 
 export const BootstrapRoute = (
