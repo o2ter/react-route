@@ -29,6 +29,9 @@ import express from 'express';
 import { ThemeVariables } from 'o2ter-ui';
 import { compileString } from '@o2ter/bootstrap.js';
 
+import * as color_defaults from './colors';
+import * as theme_color_defaults from './theme_colors';
+
 const compile = async (theme: ThemeVariables) => {
 
   const styles: Record<string, string | number> = {};
@@ -47,14 +50,20 @@ const compile = async (theme: ThemeVariables) => {
     for (const [name, color] of _.entries(theme.colors)) {
       styles[name] = color;
     }
-    styles['colors'] = `(${_.map(theme.colors, (color, name) => `"${name}": ${color}`).join(',')})`
+    styles['colors'] = `(${_.map({
+      ...color_defaults,
+      ...theme.colors,
+    }, (color, name) => `"${name}": ${color}`).join(',')})`
   }
 
   if (!_.isEmpty(theme.themeColors)) {
     for (const [name, color] of _.entries(theme.themeColors)) {
       styles[name] = color;
     }
-    styles['theme-colors'] = `(${_.map(theme.themeColors, (color, name) => `"${name}": ${color}`).join(',')})`;
+    styles['theme-colors'] = `(${_.map({
+      ...theme_color_defaults,
+      ...theme.themeColors,
+    }, (color, name) => `"${name}": ${color}`).join(',')})`;
   }
 
   if (_.isNumber(theme.minContrastRatio)) styles['min-contrast-ratio'] = theme.minContrastRatio;
