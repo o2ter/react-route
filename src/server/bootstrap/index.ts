@@ -25,12 +25,15 @@
 
 import _ from 'lodash';
 
+import crypto from 'crypto';
 import express from 'express';
 import { ThemeVariables } from 'o2ter-ui';
 import { compileString } from '@o2ter/bootstrap.js';
 
 import * as color_defaults from './colors';
 import * as theme_color_defaults from './theme_colors';
+
+const md5 = (str: string) => crypto.createHash('md5').update(str).digest('hex')
 
 const compile = async (theme: ThemeVariables) => {
 
@@ -111,10 +114,19 @@ export const BootstrapRoute = (
 ) => {
   const router = express.Router();
   for (const [name, theme] of _.entries(themes)) {
-    const css = compile(theme);
+    const promise = compile(theme).then(s => [s, md5(s)]);
     router.get(`/${name}.css`, async (req, res) => {
-      res.setHeader('content-type', 'text/css');
-      res.send(await css);
+      const [etag, css] = await promise;
+      const match = req.headers['if-none-match'];
+      if (match === `"${etag}"`) {
+        res.statusCode = 304;
+        res.end();
+        return;
+      }
+      res.setHeader('Content-Type', 'text/css');
+      res.setHeader('Cache-Control', 'public, max-age=0');
+      res.setHeader('ETag', `"${etag}"`);
+      res.send(css);
     });
   }
   return router;
