@@ -116,7 +116,7 @@ export const BootstrapRoute = (
   for (const [name, theme] of _.entries(themes)) {
     const promise = compile(theme).then(s => [s, md5(s)]);
     router.get(`/${name}.css`, async (req, res) => {
-      const [etag, css] = await promise;
+      const [css, etag] = await promise;
       const match = req.headers['if-none-match'];
       if (match === `"${etag}"`) {
         res.statusCode = 304;
