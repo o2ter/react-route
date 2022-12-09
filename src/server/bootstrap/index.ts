@@ -119,8 +119,7 @@ export const BootstrapRoute = (
       const [css, etag] = await promise;
       const match = req.headers['if-none-match'];
       if (match === `"${etag}"`) {
-        res.statusCode = 304;
-        res.end();
+        res.status(304).end();
         return;
       }
       res.setHeader('Content-Type', 'text/css');
