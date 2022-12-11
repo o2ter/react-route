@@ -27,13 +27,15 @@ import React from 'react';
 import { env } from '../../../client/env';
 import { SSRContext } from './context';
 
-const stylesheet = document.querySelector('link#bootstrap') ?? document.createElement('link');
-stylesheet.setAttribute('rel', 'stylesheet');
-document.head.appendChild(stylesheet);
+const stylesheet = typeof document === 'undefined' ? null : document.querySelector('link#bootstrap') ?? document.createElement('link');
+if (stylesheet) {
+  stylesheet.setAttribute('rel', 'stylesheet');
+  document.head.appendChild(stylesheet);
+}
 
 const updateTheme = (theme: string) => {
   const path = `${env.BOOTSTRAP_BASE_URL}/${theme}.css`;
-  stylesheet.setAttribute('href', path);
+  stylesheet?.setAttribute('href', path);
 }
 
 export const BootstrapSSRProvider: React.FC<React.PropsWithChildren<{}>> = ({

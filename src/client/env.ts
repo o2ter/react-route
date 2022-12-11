@@ -1,5 +1,5 @@
 //
-//  env.js
+//  env.ts
 //
 //  The MIT License
 //  Copyright (c) 2021 - 2022 O2ter Limited. All rights reserved.
@@ -25,10 +25,10 @@
 
 import { decompress } from '../minify/decompress';
 
-let env;
+let env: any = {};
 
 if (typeof document !== 'undefined') {
-  const envElement = document.getElementById('env');
+  const envElement = document.getElementById('env') as HTMLScriptElement;
   env = JSON.parse(decompress(envElement.text));
   envElement.remove();
 }
