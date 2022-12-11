@@ -27,7 +27,7 @@ import { decompress } from '../minify/decompress';
 
 let env;
 
-if (typeof document === 'undefined') {
+if (typeof document !== 'undefined') {
   const envElement = document.getElementById('env');
   env = JSON.parse(decompress(envElement.text));
   envElement.remove();
