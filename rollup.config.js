@@ -52,14 +52,14 @@ export default [
     output: [
       {
         entryFileNames: '[name].js',
-        chunkFileNames: 'chunks/[name].js',
+        chunkFileNames: 'internals/[name]-[hash].js',
         dir: './dist',
         format: 'cjs',
         sourcemap: true,
       },
       {
         entryFileNames: '[name].mjs',
-        chunkFileNames: 'chunks/[name].mjs',
+        chunkFileNames: 'internals/[name]-[hash].mjs',
         dir: './dist',
         format: 'esm',
         sourcemap: true,
