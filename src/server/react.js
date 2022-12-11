@@ -32,9 +32,9 @@ import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { I18nProvider } from '@o2ter/i18n';
 import { AppRegistry } from 'react-native';
-import { SSRProvider } from 'react-bootstrap';
 import { StaticNavigator } from 'o2ter-ui';
 import { SafeAreaProvider } from '../safeArea';
+import { BootstrapSSRProvider } from '../components/BootstrapProvider/SSRProvider/server';
 
 import { compress } from '../minify/compress';
 
@@ -64,13 +64,16 @@ function _renderToHTML(App, {
 }) {
 
   const context = {};
+  let selectedTheme = null;
 
   function Main() {
-    return <SSRProvider><I18nProvider preferredLocale={preferredLocale}>
-      <StaticNavigator location={location} context={context}>
-        <SafeAreaProvider><App /></SafeAreaProvider>
-      </StaticNavigator>
-    </I18nProvider></SSRProvider>;
+    return <BootstrapSSRProvider onSelectTheme={theme => { selectedTheme = theme }}>
+      <I18nProvider preferredLocale={preferredLocale}>
+        <StaticNavigator location={location} context={context}>
+          <SafeAreaProvider><App /></SafeAreaProvider>
+        </StaticNavigator>
+      </I18nProvider>
+    </BootstrapSSRProvider>;
   }
 
   AppRegistry.registerComponent('App', () => Main);
@@ -88,6 +91,12 @@ function _renderToHTML(App, {
     }
   }
 
+  let bootstrap = '';
+  if (!_.isEmpty(selectedTheme) && !_.isEmpty(env.BOOTSTRAP_BASE_URL)) {
+    const path = `${env.BOOTSTRAP_BASE_URL}/${selectedTheme}.css`;
+    bootstrap = `<link id="bootstrap" rel="stylesheet" href="${path}"></link>`;
+  }
+
   return `
     <html>
       <head>
@@ -95,7 +104,7 @@ function _renderToHTML(App, {
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover">
         ${title}${meta_string}
         <link rel="stylesheet" href="${cssSrc}" />
-        ${css}
+        ${css}${bootstrap}
       </head>
       <body>
         <div id="root">${html}</div>

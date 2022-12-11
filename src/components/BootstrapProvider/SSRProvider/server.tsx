@@ -1,5 +1,5 @@
 //
-//  client.js
+//  client.tsx
 //
 //  The MIT License
 //  Copyright (c) 2021 - 2022 O2ter Limited. All rights reserved.
@@ -24,29 +24,14 @@
 //
 
 import React from 'react';
-import { I18nProvider } from '@o2ter/i18n';
-import { AppRegistry } from 'react-native';
-import { BrowserNavigator } from 'o2ter-ui';
-import { SafeAreaProvider } from '../safeArea';
-import { BootstrapSSRProvider } from '../components/BootstrapProvider/SSRProvider/client';
+import { SSRContext } from '../SSRContext';
+const { SSRProvider } = require('react-bootstrap');
 
-export * from '../components';
-export * from './env';
-
-export const runApplication = (App) => {
-
-  const preferredLocale = document.cookie.split('; ').find((row) => row.startsWith('PREFERRED_LOCALE='))?.split('=')[1];
-
-  function Main() {
-    return <BootstrapSSRProvider><I18nProvider
-      preferredLocale={preferredLocale}
-      onChange={locale => document.cookie = `PREFERRED_LOCALE=${locale}; max-age=31536000; path=/`}>
-      <BrowserNavigator>
-        <SafeAreaProvider><App /></SafeAreaProvider>
-      </BrowserNavigator>
-    </I18nProvider></BootstrapSSRProvider>;
-  }
-
-  AppRegistry.registerComponent('App', () => Main);
-  AppRegistry.runApplication('App', { rootTag: document.getElementById('root') });
-}
+export const BootstrapSSRProvider: React.FC<React.PropsWithChildren<{
+  onSelectTheme: (theme: string) => void;
+}>> = ({
+  onSelectTheme,
+  children,
+}) => <SSRContext.Provider value={onSelectTheme}>
+  <SSRProvider>{children}</SSRProvider>
+</SSRContext.Provider>;
