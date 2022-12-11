@@ -24,12 +24,11 @@
 //
 
 import React from 'react';
-import { SSRContext } from '../SSRContext';
-const { SSRProvider } = require('react-bootstrap');
+import { SSRContext } from './context';
 
 export const BootstrapSSRProvider: React.FC<React.PropsWithChildren<{
   onSelectTheme: (theme: string) => void;
 }>> = ({
   onSelectTheme,
   children,
-}) => <SSRProvider><SSRContext.Provider value={onSelectTheme}>{children}</SSRContext.Provider></SSRProvider>;
+}) => <SSRContext.Provider value={onSelectTheme}>{children}</SSRContext.Provider>;

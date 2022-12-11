@@ -25,8 +25,7 @@
 
 import React from 'react';
 import { env } from '../../../client/env';
-import { SSRContext } from '../SSRContext';
-const { SSRProvider } = require('react-bootstrap');
+import { SSRContext } from './context';
 
 const stylesheet = document.querySelector('link#bootstrap') ?? document.createElement('link');
 stylesheet.setAttribute('rel', 'stylesheet');
@@ -39,4 +38,4 @@ const updateTheme = (theme: string) => {
 
 export const BootstrapSSRProvider: React.FC<React.PropsWithChildren<{}>> = ({
   children,
-}) => <SSRProvider><SSRContext.Provider value={updateTheme}>{children}</SSRContext.Provider></SSRProvider>;
+}) => <SSRContext.Provider value={updateTheme}>{children}</SSRContext.Provider>;

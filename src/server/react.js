@@ -32,6 +32,7 @@ import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { I18nProvider } from '@o2ter/i18n';
 import { AppRegistry } from 'react-native';
+import { SSRProvider } from 'react-bootstrap';
 import { StaticNavigator } from 'o2ter-ui';
 import { SafeAreaProvider } from '../safeArea';
 import { BootstrapSSRProvider } from '../components/BootstrapProvider/SSRProvider/server';
@@ -67,13 +68,15 @@ function _renderToHTML(App, {
   let selectedTheme = null;
 
   function Main() {
-    return <BootstrapSSRProvider onSelectTheme={theme => { selectedTheme = theme }}>
-      <I18nProvider preferredLocale={preferredLocale}>
-        <StaticNavigator location={location} context={context}>
-          <SafeAreaProvider><App /></SafeAreaProvider>
-        </StaticNavigator>
-      </I18nProvider>
-    </BootstrapSSRProvider>;
+    return <SSRProvider>
+      <BootstrapSSRProvider onSelectTheme={theme => { selectedTheme = theme }}>
+        <I18nProvider preferredLocale={preferredLocale}>
+          <StaticNavigator location={location} context={context}>
+            <SafeAreaProvider><App /></SafeAreaProvider>
+          </StaticNavigator>
+        </I18nProvider>
+      </BootstrapSSRProvider>
+    </SSRProvider>;
   }
 
   AppRegistry.registerComponent('App', () => Main);
