@@ -33,6 +33,6 @@ export const BootstrapProvider: React.FC<React.PropsWithChildren<{
   children,
 }) => {
   const updateTheme = React.useContext(SSRContext);
-  React.useEffect(() => updateTheme(theme), [theme]);
+  React.useMemo(() => updateTheme(theme), [theme]);
   return <>{children}</>;
 }
