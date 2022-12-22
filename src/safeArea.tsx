@@ -24,7 +24,7 @@
 //
 
 import React, { ComponentPropsWithoutRef } from 'react';
-import { SafeAreaProvider as _SafeAreaProvider } from 'o2ter-ui';
+import { SafeAreaProvider as _SafeAreaProvider } from '@o2ter/react-ui';
 
 const defaultMetrics = {
   frame: { x: 0, y: 0, width: 0, height: 0 },

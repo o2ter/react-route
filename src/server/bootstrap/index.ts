@@ -27,7 +27,7 @@ import _ from 'lodash';
 
 import crypto from 'crypto';
 import express from 'express';
-import { ThemeVariables } from 'o2ter-ui';
+import { ThemeVariables } from '@o2ter/react-ui';
 import { compileString } from '@o2ter/bootstrap.js';
 
 import * as color_defaults from './colors';
