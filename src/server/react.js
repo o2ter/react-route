@@ -129,9 +129,7 @@ export const ReactRoute = (App, {
 
   router.get('*', (req, res) => {
     const preferredLocale = _preferredLocale(req);
-    if (_.isString(req.cookies['PREFERRED_LOCALE'])) {
-      res.cookie('PREFERRED_LOCALE', req.cookies['PREFERRED_LOCALE'], { maxAge: 31536000 });
-    }
+    res.cookie('PREFERRED_LOCALE', preferredLocale, { maxAge: 31536000 });
     res.send(_renderToHTML(App, {
       env,
       jsSrc,
