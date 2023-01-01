@@ -45,6 +45,7 @@ export default [
     input: {
       index: 'src/index',
       client: 'src/client',
+      webpack: 'src/webpack',
     },
     external: [
       /node_modules/
@@ -77,4 +78,5 @@ export default [
   },
   rollupTypes('index'),
   rollupTypes('client'),
+  rollupTypes('webpack'),
 ];
