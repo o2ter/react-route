@@ -111,7 +111,7 @@ export const BootstrapCompiler = async (theme: ThemeVariables) => {
 
 export const BootstrapRoute = (
   themes: Record<string, ThemeVariables>,
-  precompiled: Record<string, string>,
+  precompiled: Record<string, string> = {},
 ) => {
   const router = express.Router();
   for (const [name, theme] of _.entries(themes)) {
