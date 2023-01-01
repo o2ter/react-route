@@ -35,7 +35,7 @@ import * as theme_color_defaults from './theme_colors';
 
 const md5 = (str: string) => crypto.createHash('md5').update(str).digest('hex')
 
-const compile = async (theme: ThemeVariables) => {
+export const BootstrapCompiler = async (theme: ThemeVariables) => {
 
   const styles: Record<string, string | number> = {};
 
@@ -111,10 +111,11 @@ const compile = async (theme: ThemeVariables) => {
 
 export const BootstrapRoute = (
   themes: Record<string, ThemeVariables>,
+  precompiled: Record<string, string>,
 ) => {
   const router = express.Router();
   for (const [name, theme] of _.entries(themes)) {
-    const promise = compile(theme).then(s => [s, md5(s)]);
+    const promise = precompiled[name] ? [precompiled[name], md5(precompiled[name])] : BootstrapCompiler(theme).then(s => [s, md5(s)]);
     router.get(`/${name}.css`, async (req, res) => {
       const [css, etag] = await promise;
       const match = req.headers['if-none-match'];

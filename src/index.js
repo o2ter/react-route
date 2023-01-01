@@ -23,5 +23,5 @@
 //  THE SOFTWARE.
 //
 
-export { BootstrapRoute } from './server/bootstrap';
+export { BootstrapCompiler, BootstrapRoute } from './server/bootstrap';
 export { ReactRoute } from './server/react';
