@@ -62,7 +62,6 @@ export class BootstrapPlugin {
     const importPath = path.resolve(process.cwd(), themes);
     const node_modules = path.resolve(process.cwd(), 'node_modules');
 
-    if (!fs.existsSync(outputDir)) fs.mkdirSync(outputDir, { recursive: true });
     fs.writeFileSync(tempFile, `
       import _ from '${path.resolve(node_modules, 'lodash')}';
       import fs from 'fs/promises';
