@@ -24,6 +24,7 @@
 //
 
 import _ from 'lodash';
+import os from 'os';
 import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
@@ -55,27 +56,30 @@ export class BootstrapPlugin {
 
     if (!_.isString(outputDir)) throw Error('output.path not defined.');
 
-    const importPath = path.relative(outputDir, path.resolve(process.cwd(), themes));
-    const compilerSrc = path.resolve(outputDir, `bootstrap-${random}.js`);
+    const tempDir = fs.mkdtempSync(`${os.tmpdir()}${path.sep}`);
+    const tempFile = path.resolve(tempDir, `bootstrap-${random}.js`);
+
+    const importPath = path.resolve(process.cwd(), themes);
+    const node_modules = path.resolve(process.cwd(), 'node_modules');
 
     if (!fs.existsSync(outputDir)) fs.mkdirSync(outputDir, { recursive: true });
-    fs.writeFileSync(compilerSrc, `
-      import _ from 'lodash';
+    fs.writeFileSync(tempFile, `
+      import _ from '${path.resolve(node_modules, 'lodash')}';
       import fs from 'fs/promises';
       import path from 'path';
       import themes from '${importPath}';
-      import { BootstrapCompiler } from '@o2ter/react-route';
+      import { BootstrapCompiler } from '${path.resolve(node_modules, '@o2ter/react-route')}';
       (async () => {
         const compiled = {};
         for (const [name, theme] of _.entries(themes)) {
           compiled[name] = await BootstrapCompiler(theme);
         }
-        fs.writeFile(path.join(__dirname, '${output}'), JSON.stringify(compiled));
+        fs.writeFile('${path.resolve(outputDir, output)}', JSON.stringify(compiled));
       })();
     `);
 
     compiler.hooks.make.tapAsync('BootstrapPlugin', (compilation, callback) => {
-      const dep = webpack.EntryPlugin.createDependency(compilerSrc, 'bootstrap');
+      const dep = webpack.EntryPlugin.createDependency(tempFile, 'bootstrap');
       compilation.addEntry(context, dep, `bootstrap-${random}`, callback as any);
     });
 
