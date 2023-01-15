@@ -21,7 +21,10 @@ const rollupPlugins = [
 const rollupTypes = (name) => ({
   input: `src/${name}`,
   external: [
-    /node_modules/
+    /node_modules/,
+    /^react$/,
+    /^react-native$/,
+    /^react-bootstrap$/,
   ],
   output: [
     {
@@ -48,7 +51,10 @@ export default [
       webpack: 'src/webpack',
     },
     external: [
-      /node_modules/
+      /node_modules/,
+      /^react$/,
+      /^react-native$/,
+      /^react-bootstrap$/,
     ],
     output: [
       {
