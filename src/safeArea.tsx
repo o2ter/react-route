@@ -23,7 +23,7 @@
 //  THE SOFTWARE.
 //
 
-import React, { ComponentPropsWithoutRef } from 'react';
+import React from 'react';
 import { SafeAreaProvider as _SafeAreaProvider } from '@o2ter/react-ui';
 
 const defaultMetrics = {
@@ -31,7 +31,7 @@ const defaultMetrics = {
   insets: { top: 0, left: 0, right: 0, bottom: 0 },
 };
 
-export const SafeAreaProvider: React.FC<ComponentPropsWithoutRef<typeof _SafeAreaProvider>> = ({
+export const SafeAreaProvider: React.FC<React.ComponentPropsWithoutRef<typeof _SafeAreaProvider>> = ({
   children,
   ...props
 }) => <_SafeAreaProvider initialMetrics={defaultMetrics} {...props}>{children}</_SafeAreaProvider>
