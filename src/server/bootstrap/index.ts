@@ -37,8 +37,8 @@ const md5 = (str: string) => crypto.createHash('md5').update(str).digest('hex')
 
 export const BootstrapCompiler = async (theme: ThemeVariables) => {
 
-  const styles: Record<string, string | number | boolean> = {
-    'enable-dark-mode': false,
+  const styles: Record<string, string | number> = {
+    'enable-dark-mode': 'false',
   };
 
   if (theme.grays?.['100']) styles['gray-100'] = theme.grays['100'];
