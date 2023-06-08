@@ -36,3 +36,5 @@ export const BootstrapProvider: React.FC<React.PropsWithChildren<{
   React.useMemo(() => updateTheme(theme), [theme]);
   return <>{children}</>;
 }
+
+BootstrapProvider.displayName = 'BootstrapProvider';

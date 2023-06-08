@@ -35,3 +35,5 @@ export const SafeAreaProvider: React.FC<React.ComponentPropsWithoutRef<typeof _S
   children,
   ...props
 }) => <_SafeAreaProvider initialMetrics={defaultMetrics} {...props}>{children}</_SafeAreaProvider>
+
+SafeAreaProvider.displayName = 'SafeAreaProvider';

@@ -26,3 +26,5 @@
 import React from 'react';
 
 export const SSRContext = React.createContext<(theme: string) => void>(() => { });
+
+SSRContext.displayName = 'SSRContext';

@@ -32,3 +32,5 @@ export const BootstrapSSRProvider: React.FC<React.PropsWithChildren<{
   onSelectTheme,
   children,
 }) => <SSRContext.Provider value={onSelectTheme}>{children}</SSRContext.Provider>;
+
+BootstrapSSRProvider.displayName = 'BootstrapSSRProvider';
