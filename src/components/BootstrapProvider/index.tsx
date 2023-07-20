@@ -24,7 +24,7 @@
 //
 
 import React from 'react';
-import { SSRContext } from './SSRProvider/context';
+import { SSRContext } from './context';
 
 export const BootstrapProvider: React.FC<React.PropsWithChildren<{
   theme: string;

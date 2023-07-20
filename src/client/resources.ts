@@ -1,5 +1,5 @@
 //
-//  index.js
+//  resources.ts
 //
 //  The MIT License
 //  Copyright (c) 2021 - 2023 O2ter Limited. All rights reserved.
@@ -23,5 +23,14 @@
 //  THE SOFTWARE.
 //
 
-export { BootstrapCompiler, BootstrapRoute } from './server/bootstrap';
-export { ReactRoute } from './server';
+import { decompress } from '../minify/decompress';
+
+let resources: any = {};
+
+if (typeof document !== 'undefined') {
+  const resourcesElement = document.getElementById('resources') as HTMLScriptElement;
+  resources = JSON.parse(decompress(resourcesElement.text));
+  resourcesElement.remove();
+}
+
+export { resources };

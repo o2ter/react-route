@@ -1,5 +1,5 @@
 //
-//  index.js
+//  client.tsx
 //
 //  The MIT License
 //  Copyright (c) 2021 - 2023 O2ter Limited. All rights reserved.
@@ -23,5 +23,12 @@
 //  THE SOFTWARE.
 //
 
-export { BootstrapCompiler, BootstrapRoute } from './server/bootstrap';
-export { ReactRoute } from './server';
+import React from 'react';
+import { resources } from '../../client/resources';
+import { ServerResourceContext } from './context';
+
+export const ServerResourceProvider: React.FC<React.PropsWithChildren<{}>> = ({
+  children,
+}) => <ServerResourceContext.Provider value={resources}>{children}</ServerResourceContext.Provider>;
+
+ServerResourceProvider.displayName = 'ServerResourceProvider';

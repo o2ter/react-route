@@ -1,5 +1,5 @@
 //
-//  index.js
+//  context.ts
 //
 //  The MIT License
 //  Copyright (c) 2021 - 2023 O2ter Limited. All rights reserved.
@@ -23,5 +23,8 @@
 //  THE SOFTWARE.
 //
 
-export { BootstrapCompiler, BootstrapRoute } from './server/bootstrap';
-export { ReactRoute } from './server';
+import React from 'react';
+
+export const ServerResourceContext = React.createContext<any>({});
+
+ServerResourceContext.displayName = 'ServerResourceContext';

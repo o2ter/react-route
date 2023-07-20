@@ -1,5 +1,5 @@
 //
-//  client.tsx
+//  index.tsx
 //
 //  The MIT License
 //  Copyright (c) 2021 - 2023 O2ter Limited. All rights reserved.
@@ -24,22 +24,6 @@
 //
 
 import React from 'react';
-import { env } from '../../../client/env';
-import { SSRContext } from './context';
+import { ServerResourceContext } from './context';
 
-const stylesheet = typeof document === 'undefined' ? null : document.querySelector('link#bootstrap') ?? document.createElement('link');
-if (stylesheet) {
-  stylesheet.setAttribute('rel', 'stylesheet');
-  document.head.appendChild(stylesheet);
-}
-
-const updateTheme = (theme: string) => {
-  const path = `${env.BOOTSTRAP_BASE_URL}/${theme}.css`;
-  stylesheet?.setAttribute('href', path);
-}
-
-export const BootstrapSSRProvider: React.FC<React.PropsWithChildren<{}>> = ({
-  children,
-}) => <SSRContext.Provider value={updateTheme}>{children}</SSRContext.Provider>;
-
-BootstrapSSRProvider.displayName = 'BootstrapSSRProvider';
+export const useServerResource = () => React.useContext(ServerResourceContext);

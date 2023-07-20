@@ -1,5 +1,5 @@
 //
-//  index.js
+//  index.ts
 //
 //  The MIT License
 //  Copyright (c) 2021 - 2023 O2ter Limited. All rights reserved.
@@ -23,5 +23,40 @@
 //  THE SOFTWARE.
 //
 
-export { BootstrapCompiler, BootstrapRoute } from './server/bootstrap';
-export { ReactRoute } from './server';
+import express, { Request } from 'express';
+import cookieParser from 'cookie-parser';
+
+import { _preferredLocale, _renderToHTML } from './render';
+
+type ReactRouteOptions = {
+  env: any;
+  jsSrc: string;
+  cssSrc: string;
+  resources?: (req: Request) => Promise<any>;
+}
+
+export const ReactRoute = (App: any, {
+  env = {},
+  jsSrc = '/bundle.js',
+  cssSrc = '/css/bundle.css',
+  resources,
+}: ReactRouteOptions) => {
+
+  const router = express.Router();
+  router.use(cookieParser() as any);
+
+  router.get('*', async (req, res) => {
+    const preferredLocale = _preferredLocale(req);
+    res.cookie('PREFERRED_LOCALE', preferredLocale, { maxAge: 31536000 });
+    res.send(_renderToHTML(App, {
+      env,
+      jsSrc,
+      cssSrc,
+      preferredLocale,
+      location: req.path,
+      resources: await resources?.(req),
+    }));
+  });
+
+  return router;
+}

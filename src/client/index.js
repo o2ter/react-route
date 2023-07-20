@@ -1,5 +1,5 @@
 //
-//  client.js
+//  index.js
 //
 //  The MIT License
 //  Copyright (c) 2021 - 2023 O2ter Limited. All rights reserved.
@@ -29,7 +29,8 @@ import { AppRegistry } from 'react-native';
 import { SSRProvider } from 'react-bootstrap';
 import { BrowserNavigator } from '@o2ter/react-ui';
 import { SafeAreaProvider } from '../safeArea';
-import { BootstrapSSRProvider } from '../components/BootstrapProvider/SSRProvider/client';
+import { BootstrapSSRProvider } from '../components/BootstrapProvider/client';
+import { ServerResourceProvider } from '../components/ServerResourceProvider/client';
 
 export * from '../components';
 export * from './env';
@@ -44,7 +45,9 @@ export const runApplication = (App) => {
         preferredLocale={preferredLocale}
         onChange={locale => document.cookie = `PREFERRED_LOCALE=${locale}; max-age=31536000; path=/`}>
         <BrowserNavigator>
-          <SafeAreaProvider><App /></SafeAreaProvider>
+          <SafeAreaProvider>
+            <ServerResourceProvider><App /></ServerResourceProvider>
+          </SafeAreaProvider>
         </BrowserNavigator>
       </I18nProvider></BootstrapSSRProvider>
     </SSRProvider>;
