@@ -24,3 +24,4 @@
 //
 
 export { BootstrapProvider } from './BootstrapProvider';
+export { useServerResource } from './ServerResourceProvider';
