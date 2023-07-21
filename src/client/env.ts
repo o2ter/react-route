@@ -24,12 +24,13 @@
 //
 
 import { decompress } from '../minify/decompress';
+import { deserialize } from 'proto.io/dist/common';
 
 let env: any = {};
 
 if (typeof document !== 'undefined') {
   const envElement = document.getElementById('env') as HTMLScriptElement;
-  env = JSON.parse(decompress(envElement.text));
+  env = deserialize(decompress(envElement.text));
   envElement.remove();
 }
 

@@ -9,6 +9,7 @@ import { SafeAreaProvider } from '../safeArea';
 import { BootstrapSSRProvider } from '../components/BootstrapProvider/server';
 import { ServerResourceProvider } from '../components/ServerResourceProvider/server';
 import { compress } from '../minify/compress';
+import { serialize } from 'proto.io/dist/common';
 
 export function _preferredLocale(req) {
 
@@ -79,8 +80,8 @@ export function _renderToHTML(App, {
       </head>
       <body>
         <div id="root">${html}</div>
-        <script id="env" type="text/plain">${compress(JSON.stringify(env))}</script>
-        <script id="resources" type="text/plain">${compress(JSON.stringify(resources))}</script>
+        <script id="env" type="text/plain">${compress(serialize(env))}</script>
+        <script id="resources" type="text/plain">${compress(serialize(resources))}</script>
         <script src="${jsSrc}"></script>
       </body>
     </html>

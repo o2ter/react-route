@@ -24,12 +24,13 @@
 //
 
 import { decompress } from '../minify/decompress';
+import { deserialize } from 'proto.io/dist/common';
 
 let resources: any = {};
 
 if (typeof document !== 'undefined') {
   const resourcesElement = document.getElementById('resources') as HTMLScriptElement;
-  resources = JSON.parse(decompress(resourcesElement.text));
+  resources = deserialize(decompress(resourcesElement.text));
   resourcesElement.remove();
 }
 
