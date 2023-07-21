@@ -30,7 +30,8 @@ import { SSRProvider } from 'react-bootstrap';
 import { BrowserNavigator } from '@o2ter/react-ui';
 import { SafeAreaProvider } from '../safeArea';
 import { BootstrapSSRProvider } from '../components/BootstrapProvider/client';
-import { ServerResourceProvider } from '../components/ServerResourceProvider/client';
+import { ServerResourceContext } from '../components/ServerResourceProvider/context';
+import { resources } from './resources';
 
 export * from '../components';
 export * from './env';
@@ -40,7 +41,7 @@ export const runApplication = (App) => {
   const preferredLocale = document.cookie.split('; ').find((row) => row.startsWith('PREFERRED_LOCALE='))?.split('=')[1];
 
   function Main() {
-    return <ServerResourceProvider>
+    return <ServerResourceContext.Provider value={resources}>
       <SSRProvider>
         <BootstrapSSRProvider><I18nProvider
           preferredLocale={preferredLocale}
@@ -50,7 +51,7 @@ export const runApplication = (App) => {
           </BrowserNavigator>
         </I18nProvider></BootstrapSSRProvider>
       </SSRProvider>
-    </ServerResourceProvider>;
+    </ServerResourceContext.Provider>;
   }
 
   AppRegistry.registerComponent('App', () => Main);

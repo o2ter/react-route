@@ -7,9 +7,9 @@ import { SSRProvider } from 'react-bootstrap';
 import { StaticNavigator } from '@o2ter/react-ui';
 import { SafeAreaProvider } from '../safeArea';
 import { BootstrapSSRProvider } from '../components/BootstrapProvider/server';
-import { ServerResourceProvider } from '../components/ServerResourceProvider/server';
 import { compress } from '../minify/compress';
 import { serialize } from 'proto.io/dist/common';
+import { ServerResourceContext } from '../components/ServerResourceProvider/context';
 
 export function _preferredLocale(req) {
 
@@ -35,7 +35,7 @@ export function _renderToHTML(App, {
   let selectedTheme = null;
 
   function Main() {
-    return <ServerResourceProvider resources={resources}>
+    return <ServerResourceContext.Provider value={resources}>
       <SSRProvider>
         <BootstrapSSRProvider onSelectTheme={theme => { selectedTheme = theme; }}>
           <I18nProvider preferredLocale={preferredLocale}>
@@ -45,7 +45,7 @@ export function _renderToHTML(App, {
           </I18nProvider>
         </BootstrapSSRProvider>
       </SSRProvider>
-    </ServerResourceProvider>;
+    </ServerResourceContext.Provider>;
   }
 
   AppRegistry.registerComponent('App', () => Main);
