@@ -40,17 +40,17 @@ export const runApplication = (App) => {
   const preferredLocale = document.cookie.split('; ').find((row) => row.startsWith('PREFERRED_LOCALE='))?.split('=')[1];
 
   function Main() {
-    return <SSRProvider>
-      <BootstrapSSRProvider><I18nProvider
-        preferredLocale={preferredLocale}
-        onChange={locale => document.cookie = `PREFERRED_LOCALE=${locale}; max-age=31536000; path=/`}>
-        <BrowserNavigator>
-          <SafeAreaProvider>
-            <ServerResourceProvider><App /></ServerResourceProvider>
-          </SafeAreaProvider>
-        </BrowserNavigator>
-      </I18nProvider></BootstrapSSRProvider>
-    </SSRProvider>;
+    return <ServerResourceProvider>
+      <SSRProvider>
+        <BootstrapSSRProvider><I18nProvider
+          preferredLocale={preferredLocale}
+          onChange={locale => document.cookie = `PREFERRED_LOCALE=${locale}; max-age=31536000; path=/`}>
+          <BrowserNavigator>
+            <SafeAreaProvider><App /></SafeAreaProvider>
+          </BrowserNavigator>
+        </I18nProvider></BootstrapSSRProvider>
+      </SSRProvider>
+    </ServerResourceProvider>;
   }
 
   AppRegistry.registerComponent('App', () => Main);

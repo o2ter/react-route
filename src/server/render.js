@@ -35,17 +35,17 @@ export function _renderToHTML(App, {
   let selectedTheme = null;
 
   function Main() {
-    return <SSRProvider>
-      <BootstrapSSRProvider onSelectTheme={theme => { selectedTheme = theme; }}>
-        <I18nProvider preferredLocale={preferredLocale}>
-          <StaticNavigator location={location} context={context}>
-            <SafeAreaProvider>
-              <ServerResourceProvider resources={resources}><App /></ServerResourceProvider>
-            </SafeAreaProvider>
-          </StaticNavigator>
-        </I18nProvider>
-      </BootstrapSSRProvider>
-    </SSRProvider>;
+    return <ServerResourceProvider resources={resources}>
+      <SSRProvider>
+        <BootstrapSSRProvider onSelectTheme={theme => { selectedTheme = theme; }}>
+          <I18nProvider preferredLocale={preferredLocale}>
+            <StaticNavigator location={location} context={context}>
+              <SafeAreaProvider><App /></SafeAreaProvider>
+            </StaticNavigator>
+          </I18nProvider>
+        </BootstrapSSRProvider>
+      </SSRProvider>
+    </ServerResourceProvider>;
   }
 
   AppRegistry.registerComponent('App', () => Main);
