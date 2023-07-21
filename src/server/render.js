@@ -3,7 +3,6 @@ import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { I18nProvider } from '@o2ter/i18n';
 import { AppRegistry } from 'react-native';
-import { SSRProvider } from 'react-bootstrap';
 import { StaticNavigator } from '@o2ter/react-ui';
 import { SafeAreaProvider } from '../safeArea';
 import { BootstrapSSRProvider } from '../components/BootstrapProvider/server';
@@ -36,15 +35,13 @@ export function _renderToHTML(App, {
 
   function Main() {
     return <ServerResourceContext.Provider value={resources}>
-      <SSRProvider>
-        <BootstrapSSRProvider onSelectTheme={theme => { selectedTheme = theme; }}>
-          <I18nProvider preferredLocale={preferredLocale}>
-            <StaticNavigator location={location} context={context}>
-              <SafeAreaProvider><App /></SafeAreaProvider>
-            </StaticNavigator>
-          </I18nProvider>
-        </BootstrapSSRProvider>
-      </SSRProvider>
+      <BootstrapSSRProvider onSelectTheme={theme => { selectedTheme = theme; }}>
+        <I18nProvider preferredLocale={preferredLocale}>
+          <StaticNavigator location={location} context={context}>
+            <SafeAreaProvider><App /></SafeAreaProvider>
+          </StaticNavigator>
+        </I18nProvider>
+      </BootstrapSSRProvider>
     </ServerResourceContext.Provider>;
   }
 

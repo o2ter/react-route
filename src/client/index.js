@@ -26,7 +26,6 @@
 import React from 'react';
 import { I18nProvider } from '@o2ter/i18n';
 import { AppRegistry } from 'react-native';
-import { SSRProvider } from 'react-bootstrap';
 import { BrowserNavigator } from '@o2ter/react-ui';
 import { SafeAreaProvider } from '../safeArea';
 import { BootstrapSSRProvider } from '../components/BootstrapProvider/client';
@@ -42,15 +41,13 @@ export const runApplication = (App) => {
 
   function Main() {
     return <ServerResourceContext.Provider value={resources}>
-      <SSRProvider>
-        <BootstrapSSRProvider><I18nProvider
-          preferredLocale={preferredLocale}
-          onChange={locale => document.cookie = `PREFERRED_LOCALE=${locale}; max-age=31536000; path=/`}>
-          <BrowserNavigator>
-            <SafeAreaProvider><App /></SafeAreaProvider>
-          </BrowserNavigator>
-        </I18nProvider></BootstrapSSRProvider>
-      </SSRProvider>
+      <BootstrapSSRProvider><I18nProvider
+        preferredLocale={preferredLocale}
+        onChange={locale => document.cookie = `PREFERRED_LOCALE=${locale}; max-age=31536000; path=/`}>
+        <BrowserNavigator>
+          <SafeAreaProvider><App /></SafeAreaProvider>
+        </BrowserNavigator>
+      </I18nProvider></BootstrapSSRProvider>
     </ServerResourceContext.Provider>;
   }
 
