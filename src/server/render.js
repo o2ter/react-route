@@ -10,7 +10,7 @@ import { compress } from '../minify/compress';
 import { serialize } from 'proto.io/dist/common';
 import { ServerResourceContext } from '../components/ServerResourceProvider/context';
 
-export function _preferredLocale(req) {
+export function defaultPreferredLocale(req) {
 
   if (_.isString(req.cookies['PREFERRED_LOCALE'])) {
     return req.cookies['PREFERRED_LOCALE'];
@@ -26,7 +26,7 @@ export function _preferredLocale(req) {
     }
   }
 }
-export function _renderToHTML(App, {
+export function renderToHTML(App, {
   env, jsSrc, cssSrc, location, preferredLocale, resources,
 }) {
 

@@ -26,19 +26,23 @@
 import express, { Request } from 'express';
 import cookieParser from 'cookie-parser';
 
-import { _preferredLocale, _renderToHTML } from './render';
+import { defaultPreferredLocale, renderToHTML } from './render';
+
+type PromiseLikeOr<T> = T | PromiseLike<T>;
 
 type ReactRouteOptions = {
   env: any;
   jsSrc: string;
   cssSrc: string;
-  resources?: (req: Request) => Promise<any>;
+  preferredLocale?: (req: Request) => PromiseLikeOr<string | undefined>;
+  resources?: (req: Request) => PromiseLikeOr<any>;
 }
 
 export const ReactRoute = (App: any, {
   env = {},
   jsSrc = '/bundle.js',
   cssSrc = '/css/bundle.css',
+  preferredLocale = defaultPreferredLocale,
   resources,
 }: ReactRouteOptions) => {
 
@@ -46,13 +50,13 @@ export const ReactRoute = (App: any, {
   router.use(cookieParser() as any);
 
   router.get('*', async (req, res) => {
-    const preferredLocale = _preferredLocale(req);
-    res.cookie('PREFERRED_LOCALE', preferredLocale, { maxAge: 31536000 });
-    res.send(_renderToHTML(App, {
+    const _preferredLocale = await preferredLocale(req);
+    res.cookie('PREFERRED_LOCALE', _preferredLocale, { maxAge: 31536000 });
+    res.send(renderToHTML(App, {
       env,
       jsSrc,
       cssSrc,
-      preferredLocale,
+      preferredLocale: _preferredLocale,
       location: req.path,
       resources: await resources?.(req),
     }));
