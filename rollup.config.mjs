@@ -5,8 +5,29 @@ import babel from '@rollup/plugin-babel';
 import json from '@rollup/plugin-json';
 import dts from 'rollup-plugin-dts';
 
+const configs = {
+  input: {
+    index: 'src/index',
+    client: 'src/client/index',
+    webpack: 'src/webpack',
+  },
+  external: [
+    /node_modules/,
+    /^react$/,
+    /^react-native$/,
+    /^react-bootstrap$/,
+  ],
+};
+
+const resolvePlugin = resolve({
+  extensions: [
+    '.web.ts', '.web.tsx', '.web.mjs', '.web.js',
+    '.ts', '.tsx', '.mjs', '.js',
+  ]
+});
+
 const rollupPlugins = [
-  typescript(),
+  typescript({ declaration: false }),
   babel({
     babelrc: false,
     exclude: 'node_modules/**',
@@ -18,44 +39,9 @@ const rollupPlugins = [
   json(),
 ];
 
-const rollupTypes = (name) => ({
-  input: `src/${name}`,
-  external: [
-    /node_modules/,
-    /^react$/,
-    /^react-native$/,
-    /^react-bootstrap$/,
-  ],
-  output: [
-    {
-      file: `dist/${name}.d.ts`,
-      format: 'es',
-    },
-  ],
-  plugins: [
-    resolve({
-      extensions: [
-        '.web.ts', '.web.tsx', '.web.mjs', '.web.js',
-        '.ts', '.tsx', '.mjs', '.js',
-      ]
-    }),
-    dts()
-  ],
-})
-
 export default [
   {
-    input: {
-      index: 'src/index',
-      client: 'src/client',
-      webpack: 'src/webpack',
-    },
-    external: [
-      /node_modules/,
-      /^react$/,
-      /^react-native$/,
-      /^react-bootstrap$/,
-    ],
+    ...configs,
     output: [
       {
         entryFileNames: '[name].js',
@@ -73,16 +59,24 @@ export default [
       },
     ],
     plugins: [
-      resolve({
-        extensions: [
-          '.web.ts', '.web.tsx', '.web.mjs', '.web.js',
-          '.ts', '.tsx', '.mjs', '.js',
-        ]
-      }),
+      resolvePlugin,
       ...rollupPlugins
     ],
   },
-  rollupTypes('index'),
-  rollupTypes('client'),
-  rollupTypes('webpack'),
+  {
+    ...configs,
+    output: [
+      {
+        entryFileNames: '[name].d.ts',
+        chunkFileNames: 'internals/[name]-[hash].d.ts',
+        dir: './dist',
+        format: 'es',
+        sourcemap: true,
+      },
+    ],
+    plugins: [
+      resolvePlugin,
+      dts()
+    ],
+  },
 ];

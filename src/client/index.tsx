@@ -1,5 +1,5 @@
 //
-//  index.js
+//  index.tsx
 //
 //  The MIT License
 //  Copyright (c) 2021 - 2023 O2ter Limited. All rights reserved.
@@ -35,7 +35,7 @@ import { resources } from './resources';
 export * from '../components';
 export * from './env';
 
-export const runApplication = (App) => {
+export const runApplication = (App: React.FunctionComponent) => {
 
   const preferredLocale = document.cookie.split('; ').find((row) => row.startsWith('PREFERRED_LOCALE='))?.split('=')[1];
 
