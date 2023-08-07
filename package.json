@@ -26,7 +26,8 @@
     "proto.io": ">=0.0.6",
     "react": ">=18.2.0",
     "react-bootstrap": ">=2.5.0",
-    "react-native-web": ">=0.18.9"
+    "react-native-web": ">=0.18.9",
+    "sugax": ">=1.0.83"
   },
   "devDependencies": {
     "@babel/core": "^7.20.12",
@@ -51,6 +52,7 @@
     "proto.io": "^0.0.6",
     "rollup": "^3.10.0",
     "rollup-plugin-dts": "^5.1.1",
+    "sugax": "^1.0.83",
     "tslib": "^2.4.1",
     "typescript": "^4.9.4",
     "webpack": "^5.76.0"

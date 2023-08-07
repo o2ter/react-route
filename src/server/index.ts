@@ -27,8 +27,7 @@ import express, { Request } from 'express';
 import cookieParser from 'cookie-parser';
 
 import { defaultPreferredLocale, renderToHTML } from './render';
-
-type Awaitable<T> = T | PromiseLike<T>;
+import { Awaitable } from 'sugax/dist/index.web';
 
 type ReactRouteOptions = {
   env: any;
