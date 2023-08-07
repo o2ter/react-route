@@ -28,14 +28,14 @@ import cookieParser from 'cookie-parser';
 
 import { defaultPreferredLocale, renderToHTML } from './render';
 
-type PromiseLikeOr<T> = T | PromiseLike<T>;
+type Awaitable<T> = T | PromiseLike<T>;
 
 type ReactRouteOptions = {
   env: any;
   jsSrc: string;
   cssSrc: string;
-  preferredLocale?: (req: Request) => PromiseLikeOr<string | undefined>;
-  resources?: (req: Request) => PromiseLikeOr<any>;
+  preferredLocale?: (req: Request) => Awaitable<string | undefined>;
+  resources?: (req: Request) => Awaitable<any>;
 }
 
 export const ReactRoute = (App: any, {
