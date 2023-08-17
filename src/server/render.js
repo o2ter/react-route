@@ -7,7 +7,7 @@ import { StaticNavigator } from '@o2ter/react-ui';
 import { SafeAreaProvider } from '../safeArea';
 import { BootstrapSSRProvider } from '../components/BootstrapProvider/server';
 import { compress } from '../minify/compress';
-import { serialize } from 'proto.io/dist/common';
+import { serialize } from 'proto.io';
 import { ServerResourceContext } from '../components/ServerResourceProvider/context';
 
 export function defaultPreferredLocale(req) {

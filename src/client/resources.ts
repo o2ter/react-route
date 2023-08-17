@@ -24,7 +24,7 @@
 //
 
 import { decompress } from '../minify/decompress';
-import { deserialize } from 'proto.io/dist/common';
+import { deserialize } from 'proto.io/dist/client';
 
 let resources: any = {};
 
