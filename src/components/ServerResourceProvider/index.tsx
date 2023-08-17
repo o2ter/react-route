@@ -26,4 +26,11 @@
 import React from 'react';
 import { ServerResourceContext } from './context';
 
-export const useServerResource = () => React.useContext(ServerResourceContext);
+const initState = typeof window === 'undefined' ? null : window.history.state;
+
+export const useServerResource = () => {
+  if (typeof window !== 'undefined' && initState !== window.history.state) {
+    return {};
+  }
+  return React.useContext(ServerResourceContext);;
+}
