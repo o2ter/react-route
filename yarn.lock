@@ -1660,11 +1660,6 @@ browserslist@^4.21.5:
     node-releases "^2.0.12"
     update-browserslist-db "^1.0.11"
 
-bson@^5.4.0:
-  version "5.4.0"
-  resolved "https://registry.yarnpkg.com/bson/-/bson-5.4.0.tgz#0eea77276d490953ad8616b483298dbff07384c6"
-  integrity sha512-WRZ5SQI5GfUuKnPTNmAYPiKIof3ORXAF4IRU5UcgmivNIon01rWQlw5RUH954dpu8yGL8T59YShVddIPaU/gFA==
-
 buffer-equal-constant-time@1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/buffer-equal-constant-time/-/buffer-equal-constant-time-1.0.1.tgz#f8e71132f7ffe6e01a5c9697a4c6f3e48d5cc819"
@@ -2732,13 +2727,12 @@ prop-types@^15.5.7, prop-types@^15.7.2:
     object-assign "^4.1.1"
     react-is "^16.13.1"
 
-proto.io@^0.0.22:
-  version "0.0.22"
-  resolved "https://registry.yarnpkg.com/proto.io/-/proto.io-0.0.22.tgz#61a6de24856b81d760329f7e7a8a804e0238a6ee"
-  integrity sha512-A8TRqRTsxeU7DmFxKbr+oBSB+QME7hkf0krBHctlxoUKJielXpJf8y8cywG1zmAzLzdfjWGwT9lvm6h0q0eK7Q==
+proto.io@^0.0.25:
+  version "0.0.25"
+  resolved "https://registry.yarnpkg.com/proto.io/-/proto.io-0.0.25.tgz#d14244bd26ce94aeb287a73317cf6038a46ed94f"
+  integrity sha512-CqVijDVHDmThoPvZ59XGM4okZknmicUQgLDNeKN4V5DM21efnZDUDRje7ukZK2Nhucvo6ITWAMQZXyCGoWjEQw==
   dependencies:
     axios "^1.2.2"
-    bson "^5.4.0"
     busboy "^1.6.0"
     cookie-parser "^1.4.6"
     csrf "^3.1.0"
